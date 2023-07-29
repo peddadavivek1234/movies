@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
+import axios from "axios";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ name: "", password: "" });
@@ -13,6 +14,16 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    axios
+      .post("https://hoblist.com/api/movieList")
+      .then((response) => {
+        console.log(response);
+        navigate("/movies");
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Invalid Credentials");
+      });
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (
       storedUser &&
@@ -28,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <input

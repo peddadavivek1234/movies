@@ -1,5 +1,5 @@
 /* Inline styles for Login component (Login.js) */
-div {
+.login {
   display: flex;
   flex-direction: column;
   align-items: center;
